@@ -1,4 +1,5 @@
-from translate import Translator
+#combination of translate + anki connect
+from translate import Translator #you need to install it
 import json
 import urllib.request
 
@@ -18,14 +19,14 @@ def invoke(action, **params):
         raise Exception(response['error'])
     return response['result']
 
-translator= Translator(from_lang="en", to_lang="ru")# переводчик окда?
+translator= Translator(from_lang="en", to_lang="ru") #you can also change translator, read translate doc
 
-with open("workData.txt") as work_data:
+with open("workData.txt") as work_data: #hardcoded filename :/
     for line in work_data:
         if line.rstrip('\n') == "*" or line == "\n":
-            print("pass")
+            #print("pass") debugged
             continue
-        if True:
+        if True: #I know how it looks, sorry
             note = {'deckName': 'test1', 'modelName': 'Basic', 'fields': {'Front': line, 'Back': translator.translate(line)}, 'options': { 'allowDuplicate': True, 'duplicateScope': 'deck'}}
             invoke('addNote', note=note)
-            print(line)
+            #print(line) debugged
